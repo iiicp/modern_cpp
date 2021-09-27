@@ -1,3 +1,5 @@
+#ifndef TEST_FUNCTION_LAMBDA
+#define TEST_FUNCTION_LAMBDA
 class OldCallBack {
 public:
   /// typedef void(*DataCallBack)(char *data, int len);
@@ -42,3 +44,4 @@ public:
 private:
   DataCallBack m_cb;
 };
+#endif
