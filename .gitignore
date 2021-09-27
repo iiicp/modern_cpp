@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+c++11/build/ 
+c++11/.idea/
