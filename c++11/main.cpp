@@ -1,5 +1,6 @@
 #include <iostream>
 #include "function_lambda.h"
+#include "null_ptr.h"
 
 void callback_func(char *data, int len) {
   std::cout << "old style" << std::endl;
@@ -23,9 +24,17 @@ void test_function_lambda() {
   n_cb.send_callback();
 }
 
+void test_null_ptr() {
+  Null_Ptr_Test test;
+  test.func(nullptr);
+  /// error ambiguous!!!
+  //test.func(NULL);
+}
+
 int main() {
 
   test_function_lambda();
+  test_null_ptr();
 
   return 0;
 }
