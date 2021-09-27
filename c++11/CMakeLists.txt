@@ -3,4 +3,4 @@ project(cpp11test)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(${cpp11test} function_lambda.cpp main.cpp auto_decltype_for_range.h)
+add_executable(${cpp11test} function_lambda.h null_ptr.h function_lambda.h main.cpp)
