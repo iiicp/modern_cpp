@@ -15,14 +15,14 @@
 #include <chrono>
 #include <string>
 
-/// 0, 首先选择时钟，一般是system_clock
+/// 0, 首先选择时钟，一般是system_clock或者steady_clock
 /// 1. 获取开始时间点
 ///     time_since_epoch 表示获取到距离1970年的时间ms
 /// 2. 获取结束时间点
 ///      时间点间可以进行time_point_cast<>
 /// 3, 时间点的差值就是 duration
-///      duration之间也可以进行转换
-///    最后打印的时候都是通过count来做
+///      duration之间也可以进行转换,使用duration_cast<>
+///    最后打印的时候都是通过count()来做
 
 class ChronoTest {
 public:
@@ -37,19 +37,28 @@ public:
   void testSystemClock() {
     using namespace std::chrono;
 
+    /// 获取开始时间点
     time_point<system_clock> start = system_clock::now();
     sum10000();
     ///std::this_thread::sleep_for(std::chrono::seconds(2));
+    /// 获取结束时间点
     time_point<system_clock> end = system_clock::now();
 
     duration<double> elapsed_s = (end - start);
-    duration<double, std::milli> elapsed_ms = (end - start);
+    duration<double, std::milli> elapsed_ms =  end - start;
     duration<double, std::micro> elepsed_mics = end - start;
     duration<double, std::nano> elepsed_nanos = end - start;
     std::cout << "Elapsed time: " << elapsed_s.count() << " s" << std::endl;
     std::cout << "Elapsed time: " << elapsed_ms.count() << " ms" << std::endl;
     std::cout << "Elapsed time: " << elepsed_mics.count() << " mics" << std::endl;
     std::cout << "Elapsed time: " << elepsed_nanos.count() << " mics" << std::endl;
+
+    /// 获取时间戳
+    /// 默认是us
+    std::cout << start.time_since_epoch().count() << std::endl;
+    /// 时间点可以转换成其它单位，eg 转成了second
+    auto s = time_point_cast<seconds>(start);
+    std::cout << s.time_since_epoch().count() << std::endl;
   }
 
   void testSteadyClock() {
@@ -96,9 +105,9 @@ public:
     auto t = system_clock::now();
     auto t2 = time_point_cast<seconds>(t);
     auto t3 = steady_clock::now();
-    std::cout << t.time_since_epoch().count() << " ms" << std::endl;
+    std::cout << t.time_since_epoch().count() << " us" << std::endl;
     std::cout << t2.time_since_epoch().count() << " s" << std::endl;
-    std::cout << t3.time_since_epoch().count() << " ms" << std::endl;
+    std::cout << t3.time_since_epoch().count() << " us" << std::endl;
   }
 };
 
