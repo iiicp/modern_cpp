@@ -34,3 +34,5 @@ c++11/build/
 c++11/.idea/ 
 c++17/build/ 
 c++17/.idea/ 
+c++14/build/ 
+c++14/.idea/
