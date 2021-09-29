@@ -5,6 +5,8 @@
 #include "Inline_varible.h"
 #include "If_constexpr.h"
 #include "fold_expr.h"
+#include "OptionalTest.h"
+#include "VariantTest.h"
 
 void test_variant_visit() {
   VariantVisitTest test;
@@ -47,6 +49,33 @@ void test_fold_expr() {
   print3(1,2,3,4);
 }
 
+void test_optional() {
+  OptionalTest test;
+  for (auto s: {"42", " 077", "hello", "0x33"}) {
+    std::optional<int> oi = test.asInt(s);
+    if (oi.has_value()) {
+      std::cout << "convert '" << s << "' to int: " << oi.value() << "\n";
+    }else {
+      std::cout << "can't convert '" << s << "' to int\n";
+    }
+  }
+
+  Name n{"cp", std::nullopt, "sss"};
+  std::cout << n << std::endl;
+
+  Name m{"Donald", "Ervin", "Knuth"};
+  std::cout << m << "\n";
+
+  test.testAll();
+}
+
+void test_variant() {
+  VariantTest t;
+  t.test();
+  t.testAll();
+  t.testOther();
+}
+
 int main() {
   test_variant_visit();
   test_struct_binding();
@@ -54,5 +83,7 @@ int main() {
   test_inline_varible();
   test_if_constexpr();
   test_fold_expr();
+  test_optional();
+  test_variant();
   return 0;
 }
