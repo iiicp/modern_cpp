@@ -26,6 +26,7 @@ Overloaded(Ts...)->Overloaded<Ts...>;
 class VariantVisitTest{
 public:
   void testVariantVisit() {
+
     std::variant<int, std::string, double> IntStrDouble = {"study modern cpp"};
     std::visit(Overloaded{
         [](const int& i) {
