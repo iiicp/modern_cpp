@@ -146,6 +146,7 @@ public:
         }
       }, val);
     }
+    std::cout << '\n';
   }
 };
 

@@ -7,6 +7,9 @@
 #include "fold_expr.h"
 #include "OptionalTest.h"
 #include "VariantTest.h"
+#include "AnyTest.h"
+#include "string_view_test.h"
+#include "FileSystemTest.h"
 
 void test_variant_visit() {
   VariantVisitTest test;
@@ -76,6 +79,22 @@ void test_variant() {
   t.testOther();
 }
 
+void test_any() {
+  AnyTest t;
+  t.test();
+}
+
+void string_view_test() {
+  StringViewTest t;
+  t.test();
+  t.testAll();
+}
+
+void test_filesystem() {
+  FileSystemTest t;
+  t.test();
+}
+
 int main() {
   test_variant_visit();
   test_struct_binding();
@@ -85,5 +104,8 @@ int main() {
   test_fold_expr();
   test_optional();
   test_variant();
+  test_any();
+  string_view_test();
+  test_filesystem();
   return 0;
 }
